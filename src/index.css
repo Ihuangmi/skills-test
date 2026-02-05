@@ -1,0 +1,129 @@
+/* 全局样式 */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .chat-list {
+    width: 100% !important;
+    height: 40vh !important;
+    border-right: none !important;
+    border-bottom: 1px solid #f0f0f0 !important;
+  }
+  
+  .chat-main {
+    height: 60vh !important;
+  }
+  
+  .config-panel {
+    width: 100% !important;
+    height: 100vh !important;
+    border-left: none !important;
+    position: fixed !important;
+    top: 0 !important;
+    right: 0 !important;
+    z-index: 100 !important;
+  }
+  
+  .message-item {
+    max-width: 100% !important;
+  }
+  
+  .message-item .ant-card {
+    max-width: calc(100% - 52px) !important;
+  }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 消息列表动画 */
+.message-item {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 加载动画 */
+.loading-spinner {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 消息输入框样式 */
+.message-input textarea {
+  resize: none;
+  font-family: inherit;
+}
+
+/* 会话列表项悬停效果 */
+.message-item:hover .message-stats {
+  opacity: 1;
+}
+
+.message-stats {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* 配置面板样式 */
+.config-panel .ant-card {
+  transition: all 0.3s ease;
+}
+
+.config-panel .ant-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
