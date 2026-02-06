@@ -1,15 +1,12 @@
 // 主聊天区域组件
 import React, { useEffect, useRef } from 'react';
-import { Empty, Alert, Typography } from 'antd';
 import { useChat } from '../../hooks/useChat';
 import { useConfig } from '../../hooks/useConfig';
 import MessageItem from './MessageItem';
 import MessageInput from './MessageInput';
 
-const { Title } = Typography;
-
 const ChatMain: React.FC = () => {
-  const { getCurrentSession, error, clearError } = useChat();
+  const { getCurrentSession, error } = useChat();
   const { apiKey } = useConfig();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
@@ -37,17 +34,16 @@ const ChatMain: React.FC = () => {
     
     if (currentSession.messages.length === 0) {
       return (
-        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-          <Empty 
-            description="开始聊天吧！"
-            style={{ textAlign: 'center' }}
-          />
+        <div className="empty-state">
+          <div className="empty-state-icon">💬</div>
+          <h3 className="empty-state-title">开始聊天吧！</h3>
+          <p className="empty-state-description">输入您的问题，获取AI的回答</p>
         </div>
       );
     }
     
     return (
-      <div style={{ padding: '16px' }}>
+      <div className="messages-container">
         {currentSession.messages.map((message) => (
           <MessageItem key={message.id} message={message} />
         ))}
@@ -61,15 +57,13 @@ const ChatMain: React.FC = () => {
     if (!error) return null;
     
     return (
-      <Alert
-        message="错误"
-        description={error}
-        type="error"
-        showIcon
-        closable
-        onClose={clearError}
-        style={{ margin: '16px' }}
-      />
+      <div className="error-notification">
+        <div className="error-icon">⚠️</div>
+        <div className="error-content">
+          <h4 className="error-title">错误</h4>
+          <p className="error-message">{error}</p>
+        </div>
+      </div>
     );
   };
   
@@ -78,41 +72,30 @@ const ChatMain: React.FC = () => {
     if (apiKey) return null;
     
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', padding: '16px' }}>
-        <Empty
-          description={
-            <div style={{ textAlign: 'center' }}>
-              <Title level={5}>请先设置API Key</Title>
-              <p>在左侧配置面板中输入您的SiliconFlow API Key</p>
-            </div>
-          }
-          style={{ textAlign: 'center' }}
-        />
+      <div className="empty-state">
+        <div className="empty-state-icon">🔑</div>
+        <h3 className="empty-state-title">请先设置API Key</h3>
+        <p className="empty-state-description">在配置面板中输入您的SiliconFlow API Key</p>
       </div>
     );
   };
   
   return (
-    <div 
-      className="chat-main"
-      style={{
-        flex: 1,
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100vh',
-        backgroundColor: '#fafafa',
-      }}
-    >
+    <div className="chat-main">
+      {/* 聊天头部 */}
+      <div className="chat-header">
+        <h2 className="chat-header-title">
+          {currentSession?.title || '新会话'}
+        </h2>
+      </div>
+      
       {/* 错误提示 */}
       {renderError()}
       
       {/* 消息列表 */}
       <div 
         ref={chatContainerRef}
-        style={{
-          flex: 1,
-          overflowY: 'auto',
-        }}
+        className="chat-messages"
       >
         {apiKey ? renderMessages() : renderAPIKeyPrompt()}
       </div>

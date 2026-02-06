@@ -10,13 +10,6 @@ interface MessageInputProps {
   disabled?: boolean;
 }
 
-// 扩展Window接口
-interface WindowWithTypingTimeout extends Window {
-  typingTimeout?: number;
-}
-
-declare const window: WindowWithTypingTimeout;
-
 const MessageInput: React.FC<MessageInputProps> = ({ disabled = false }) => {
   const [inputValue, setInputValue] = useState('');
   const textAreaRef = useRef<any>(null);
@@ -70,38 +63,24 @@ const MessageInput: React.FC<MessageInputProps> = ({ disabled = false }) => {
   };
   
   return (
-    <div 
-      className="message-input"
-      style={{
-        position: 'sticky',
-        bottom: 0,
-        padding: '16px',
-        backgroundColor: 'white',
-        borderTop: '1px solid #f0f0f0',
-        boxShadow: '0 -2px 8px rgba(0, 0, 0, 0.06)',
-      }}
-    >
-      <div style={{ display: 'flex', alignItems: 'flex-end', gap: '12px' }}>
+    <div className="message-input-container">
+      <div className="input-wrapper">
         {/* 文本输入框 */}
-        <TextArea
-          ref={textAreaRef}
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyPress={handleKeyPress}
-          placeholder="输入消息... (Shift+Enter 换行)"
-          style={{
-            flex: 1,
-            borderRadius: '8px',
-            resize: 'none',
-            minHeight: '64px',
-            maxHeight: '200px',
-          }}
-          disabled={isSending || disabled}
-          autoSize={{ minRows: 1, maxRows: 4 }}
-        />
+        <div className="input-area">
+          <TextArea
+            ref={textAreaRef}
+            value={inputValue}
+            onChange={handleInputChange}
+            onKeyPress={handleKeyPress}
+            placeholder="输入消息... (Shift+Enter 换行)"
+            className="message-textarea"
+            disabled={isSending || disabled}
+            autoSize={{ minRows: 1, maxRows: 4 }}
+          />
+        </div>
         
         {/* 操作按钮 */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div className="input-actions">
           {/* 停止按钮 */}
           {isStreaming && (
             <Tooltip title="停止生成">
@@ -109,7 +88,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ disabled = false }) => {
                 danger
                 icon={<StopOutlined />}
                 onClick={stopStreaming}
-                style={{ width: '48px', height: '48px', borderRadius: '8px' }}
+                className="btn-icon btn-danger"
               />
             </Tooltip>
           )}
@@ -122,12 +101,7 @@ const MessageInput: React.FC<MessageInputProps> = ({ disabled = false }) => {
               onClick={handleSend}
               disabled={!inputValue.trim() || isSending || disabled}
               loading={isSending}
-              style={{ 
-                width: '48px', 
-                height: '48px', 
-                borderRadius: '8px',
-                backgroundColor: inputValue.trim() ? '#1890ff' : '#d9d9d9',
-              }}
+              className="btn-icon btn-primary"
             />
           </Tooltip>
         </div>

@@ -1,11 +1,8 @@
 // 会话列表组件
 import React from 'react';
-import { Button, Typography, Tooltip, Popconfirm, Empty } from 'antd';
+import { Button, Tooltip, Popconfirm } from 'antd';
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useChat } from '../../hooks/useChat';
-import type { ChatSession } from '../../types';
-
-const { Text } = Typography;
 
 const ChatList: React.FC = () => {
   const {
@@ -35,34 +32,29 @@ const ChatList: React.FC = () => {
   };
   
   return (
-    <div 
-      className="chat-list"
-      style={{
-        width: '280px',
-        height: '100vh',
-        borderRight: '1px solid #f0f0f0',
-        padding: '16px',
-        overflowY: 'auto',
-        backgroundColor: 'white',
-      }}
-    >
+    <div className="chat-sidebar">
       {/* 标题和新建按钮 */}
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-        <Typography.Title level={4} style={{ margin: 0 }}>会话</Typography.Title>
+      <div className="sidebar-header">
+        <h2 className="sidebar-title">会话</h2>
         <Tooltip title="新建会话">
           <Button
             type="primary"
             icon={<PlusOutlined />}
             onClick={createSession}
             shape="circle"
+            className="btn-primary"
           />
         </Tooltip>
       </div>
       
       {/* 会话列表 */}
-      <div style={{ height: 'calc(100vh - 80px)', overflowY: 'auto' }}>
+      <div className="sidebar-content">
         {sessions.length === 0 ? (
-          <Empty description="暂无会话" />
+          <div className="empty-state">
+            <div className="empty-state-icon">💬</div>
+            <h3 className="empty-state-title">暂无会话</h3>
+            <p className="empty-state-description">点击右上角按钮创建新会话</p>
+          </div>
         ) : (
           sessions.map((session) => {
             const isCurrentSession = session.id === currentSessionId;
@@ -70,75 +62,24 @@ const ChatList: React.FC = () => {
             return (
               <div
                 key={session.id}
-                style={{
-                  borderRadius: '8px',
-                  marginBottom: '8px',
-                  backgroundColor: isCurrentSession ? '#e6f7ff' : 'transparent',
-                  border: isCurrentSession ? '1px solid #91d5ff' : '1px solid transparent',
-                  cursor: 'pointer',
-                  transition: 'all 0.3s ease',
-                  padding: '12px',
-                  position: 'relative',
-                }}
+                className={`session-item ${isCurrentSession ? 'active' : ''}`}
                 onClick={() => switchSession(session.id)}
-                onMouseEnter={(e) => {
-                  const deleteBtn = e.currentTarget.querySelector('.delete-btn') as HTMLElement;
-                  if (deleteBtn) {
-                    deleteBtn.style.opacity = '1';
-                  }
-                }}
-                onMouseLeave={(e) => {
-                  const deleteBtn = e.currentTarget.querySelector('.delete-btn') as HTMLElement;
-                  if (deleteBtn) {
-                    deleteBtn.style.opacity = '0';
-                  }
-                }}
               >
                 {/* 会话标题和时间 */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                  <Text 
-                    strong 
-                    ellipsis 
-                    style={{ 
-                      fontSize: '14px',
-                      color: isCurrentSession ? '#1890ff' : 'inherit',
-                    }}
-                  >
-                    {session.title}
-                  </Text>
-                  <Text type="secondary" style={{ fontSize: '12px' }}>
-                    {formatTime(session.updatedAt)}
-                  </Text>
+                <div className="session-meta">
+                  <h4 className="session-title">{session.title}</h4>
+                  <span className="session-time">{formatTime(session.updatedAt)}</span>
                 </div>
                 
                 {/* 会话摘要 */}
-                <Text 
-                  type="secondary" 
-                  ellipsis 
-                  style={{ 
-                    fontSize: '12px',
-                    display: '-webkit-box',
-                    WebkitLineClamp: 1,
-                    WebkitBoxOrient: 'vertical',
-                    overflow: 'hidden',
-                  }}
-                >
+                <p className="session-preview">
                   {session.messages.length > 0 
                     ? session.messages[0].content 
                     : '无消息'}
-                </Text>
+                </p>
                 
                 {/* 删除按钮 */}
-                <div 
-                  className="delete-btn"
-                  style={{ 
-                    position: 'absolute', 
-                    top: '8px', 
-                    right: '8px', 
-                    opacity: 0, 
-                    transition: 'opacity 0.3s ease'
-                  }}
-                >
+                <div className="session-actions">
                   <Popconfirm
                     title="确定要删除这个会话吗？"
                     onConfirm={() => deleteSession(session.id)}
@@ -150,7 +91,7 @@ const ChatList: React.FC = () => {
                       danger
                       icon={<DeleteOutlined />}
                       size="small"
-                      style={{ fontSize: '12px' }}
+                      className="session-delete-btn"
                     />
                   </Popconfirm>
                 </div>

@@ -15,9 +15,9 @@
 - **流式响应**：实现逐字输出效果，使用Server-Sent Events
 
 ### 3. 功能增强
-- *`js
-export default defineConfig([
-  globalIgnores([和token用量
+- **Markdown渲染**：支持代码高亮、链接解析等
+- **一键复制**：每条消息支持一键复制回复内容
+- **响应统计**：显示响应耗时和token用量
 
 ### 4. 错误处理与状态管理
 - **异常提示**：网络错误、API限流等异常提示
@@ -34,7 +34,7 @@ export default defineConfig([
 
 ### 环境要求
 - Node.js 16.x 或更高版本
-- npm 7.x 或更高版本
+- pnpm 7.x 或更高版本
 
 ### 安装步骤
 
@@ -42,15 +42,23 @@ export default defineConfig([
    ```bash
    git clone <repository-url>
    cd siliconflow-chat
-````
+   ```
 
 2. **安装依赖**
-
    ```bash
-   npm install
+   pnpm install
+   ```
+
+   ```
+
+   ```
+
+   ```
+
    ```
 
 3. **启动开发服务器**
+   pppp
 
    ```bash
    npm run dev
@@ -61,22 +69,15 @@ export default defineConfig([
 
 ### 构建生产版本
 
-1. **构建项目**
-
-   ```bash
-   npm run build
-   ```
+1. p**构建项目**
 
 2. **预览构建结果**
+   ````bash
+   pnpm run preview
+   ```览构建结果**
    ```bash
    npm run preview
-   ```
-
-##
-
-```
- 使用指南
-
+   `
 ### 1. 设置API Key
 - 点击右上角的设置图标
 - 在API Key输入框中输入您的SiliconFlow API Key

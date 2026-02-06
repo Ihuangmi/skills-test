@@ -1,42 +1,43 @@
 // 配置面板组件
 import React from 'react';
-import { Card, Typography, Divider } from 'antd';
 import APIKeyInput from './APIKeyInput';
 import ModelConfig from './ModelConfig';
 
-const { Title } = Typography;
-
 const ConfigPanel: React.FC = () => {
   return (
-    <div 
-      className="config-panel"
-      style={{
-        width: '300px',
-        height: '100vh',
-        borderLeft: '1px solid #f0f0f0',
-        padding: '16px',
-        overflowY: 'auto',
-        backgroundColor: 'white',
-      }}
-    >
-      <Title level={4} style={{ margin: 0, marginBottom: '24px' }}>设置</Title>
+    <div className="config-panel">
+      {/* 配置面板头部 */}
+      <div className="config-header">
+        <h2 className="config-title">设置</h2>
+      </div>
       
-      <Card size="small" style={{ marginBottom: '16px' }}>
-        <APIKeyInput />
-        <Divider style={{ margin: '16px 0' }} />
-        <ModelConfig />
-      </Card>
-      
-      <Card size="small" style={{ marginBottom: '16px' }}>
-        <Title level={5} style={{ margin: 0, marginBottom: '16px' }}>关于</Title>
-        <Typography.Text type="secondary" style={{ fontSize: '14px' }}>
-          这是一个基于React的类OpenAI聊天界面，支持与SiliconFlow平台的API交互。
-        </Typography.Text>
-        <br />
-        <Typography.Text type="secondary" style={{ fontSize: '14px', marginTop: '8px', display: 'block' }}>
-          版本: 1.0.0
-        </Typography.Text>
-      </Card>
+      {/* 配置面板内容 */}
+      <div className="config-content">
+        {/* API Key配置 */}
+        <div className="config-section">
+          <h3 className="config-section-title">API 配置</h3>
+          <APIKeyInput />
+        </div>
+        
+        {/* 模型配置 */}
+        <div className="config-section">
+          <h3 className="config-section-title">模型配置</h3>
+          <ModelConfig />
+        </div>
+        
+        {/* 关于信息 */}
+        <div className="config-section">
+          <h3 className="config-section-title">关于</h3>
+          <div className="card">
+            <p className="config-about-text">
+              这是一个基于React的类OpenAI聊天界面，支持与SiliconFlow平台的API交互。
+            </p>
+            <p className="config-about-version">
+              版本: 1.0.0
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
