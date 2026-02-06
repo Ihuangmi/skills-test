@@ -1,6 +1,6 @@
-// API调用工具
+// SiliconFlow API服务
 import axios, { AxiosError } from 'axios';
-import type { APIResponse, StreamResponse, Message, ModelConfig, APIError } from '../types';
+import type { APIResponse, StreamResponse, ChatRequest, APIError, ModelInfo } from '../types';
 
 // SiliconFlow API基础URL
 const API_BASE_URL = 'https://api.siliconflow.cn/v1';
@@ -23,23 +23,12 @@ const createAxiosInstance = (apiKey: string) => {
  */
 export const sendChatRequest = async (
   apiKey: string,
-  messages: Message[],
-  modelConfig: ModelConfig
+  request: ChatRequest
 ): Promise<APIResponse> => {
   const instance = createAxiosInstance(apiKey);
   
   try {
-    const response = await instance.post<APIResponse>('/chat/completions', {
-      model: modelConfig.model,
-      messages: messages.map(msg => ({
-        role: msg.role,
-        content: msg.content,
-      })),
-      temperature: modelConfig.temperature,
-      max_tokens: modelConfig.max_tokens,
-      stream: false,
-    });
-    
+    const response = await instance.post<APIResponse>('/chat/completions', request);
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
@@ -55,46 +44,39 @@ export const sendChatRequest = async (
  */
 export const sendStreamChatRequest = (
   apiKey: string,
-  messages: Message[],
-  modelConfig: ModelConfig,
+  request: ChatRequest,
   onChunk: (chunk: string) => void,
   onComplete: () => void,
   onError: (error: Error) => void
-): () => void => {
+): (() => void) => {
   const instance = createAxiosInstance(apiKey);
-  let controller = new AbortController();
+  const controller = new AbortController();
   
+  // 简化的流式请求处理
   const fetchStream = async () => {
     try {
-      const response = await instance.post('/chat/completions', {
-        model: modelConfig.model,
-        messages: messages.map(msg => ({
-          role: msg.role,
-          content: msg.content,
-        })),
-        temperature: modelConfig.temperature,
-        max_tokens: modelConfig.max_tokens,
-        stream: true,
-      }, {
+      // 发送请求
+      const response = await instance.post('/chat/completions', request, {
         responseType: 'stream',
         signal: controller.signal,
       });
       
-      const reader = response.data.getReader();
+      // 检查响应
+      if (!response.data) {
+        throw new Error('响应数据为空');
+      }
+      
+      const stream = response.data;
       const decoder = new TextDecoder();
       let buffer = '';
       
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) {
-          onComplete();
-          break;
-        }
-        
-        buffer += decoder.decode(value, { stream: true });
+      // 监听数据流
+      stream.on('data', (chunk: Buffer) => {
+        buffer += decoder.decode(chunk, { stream: true });
         const lines = buffer.split('\n');
         buffer = lines.pop() || '';
         
+        // 处理每一行
         for (const line of lines) {
           if (line.trim() === '') continue;
           if (line.startsWith('data: ')) {
@@ -103,37 +85,60 @@ export const sendStreamChatRequest = (
               onComplete();
               return;
             }
+            
             try {
-              const data = JSON.parse(dataStr) as StreamResponse;
-              const content = data.choices[0]?.delta?.content;
-              if (content) {
-                onChunk(content);
+              const data = JSON.parse(dataStr);
+              
+              // 检查错误
+              if (data.error) {
+                onError(new Error(data.error.message || 'API请求失败'));
+                return;
+              }
+              
+              // 安全地获取content
+              if (data.choices && Array.isArray(data.choices)) {
+                const choice = data.choices[0];
+                if (choice && choice.delta && choice.delta.content) {
+                  onChunk(choice.delta.content);
+                }
               }
             } catch (error) {
               console.error('解析流式响应失败:', error);
             }
           }
         }
-      }
+      });
+      
+      // 监听流结束
+      stream.on('end', () => {
+        onComplete();
+      });
+      
+      // 监听流错误
+      stream.on('error', (error: Error) => {
+        if (!controller.signal.aborted) {
+          onError(error);
+        }
+      });
     } catch (error) {
+      console.error('流式请求失败:', error);
       if (!controller.signal.aborted) {
         onError(error instanceof Error ? error : new Error('流式请求失败'));
       }
     }
   };
   
+  // 启动请求
   fetchStream();
   
   // 返回中止函数
-  return () => {
-    controller.abort();
-  };
+  return () => controller.abort();
 };
 
 /**
  * 获取可用模型列表
  */
-export const getAvailableModels = async (apiKey: string): Promise<Array<{ id: string; name: string }>> => {
+export const getAvailableModels = async (apiKey: string): Promise<ModelInfo[]> => {
   const instance = createAxiosInstance(apiKey);
   
   try {

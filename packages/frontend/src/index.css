@@ -7,51 +7,54 @@
 
 :root {
   /* 全新主题色系统 - 现代深紫色调 */
-  --primary-color: #6D28D9; /* 主色：深紫色 */
-  --primary-light: #8B5CF6; /* 主色浅色 */
-  --primary-dark: #5B21B6; /* 主色深色 */
-  --primary-lightest: #EDE9FE; /* 主色最浅色 */
-  
+  --primary-color: #6d28d9; /* 主色：深紫色 */
+  --primary-light: #8b5cf6; /* 主色浅色 */
+  --primary-dark: #5b21b6; /* 主色深色 */
+  --primary-lightest: #ede9fe; /* 主色最浅色 */
+
   --secondary-color: #059669; /* 辅色：深绿色 */
-  --secondary-light: #10B981; /* 辅色浅色 */
+  --secondary-light: #10b981; /* 辅色浅色 */
   --secondary-dark: #047857; /* 辅色深色 */
-  
-  --accent-color: #D97706; /* 强调色：深橙色 */
-  --accent-light: #F59E0B; /* 强调色浅色 */
-  --accent-dark: #B45309; /* 强调色深色 */
-  
-  --success-color: #10B981; /* 成功色 */
-  --warning-color: #F59E0B; /* 警告色 */
-  --error-color: #EF4444; /* 错误色 */
-  --info-color: #3B82F6; /* 信息色 */
-  
+
+  --accent-color: #d97706; /* 强调色：深橙色 */
+  --accent-light: #f59e0b; /* 强调色浅色 */
+  --accent-dark: #b45309; /* 强调色深色 */
+
+  --success-color: #10b981; /* 成功色 */
+  --warning-color: #f59e0b; /* 警告色 */
+  --error-color: #ef4444; /* 错误色 */
+  --info-color: #3b82f6; /* 信息色 */
+
   /* 背景颜色系统 */
-  --bg-primary: #FFFFFF; /* 主背景 */
-  --bg-secondary: #F9FAFB; /* 次要背景 */
-  --bg-tertiary: #F3F4F6; /* 第三背景 */
-  --bg-quaternary: #E5E7EB; /* 第四背景 */
-  --bg-elevated: #FFFFFF; /*  elevated 背景 */
-  
+  --bg-primary: #ffffff; /* 主背景 */
+  --bg-secondary: #f9fafb; /* 次要背景 */
+  --bg-tertiary: #f3f4f6; /* 第三背景 */
+  --bg-quaternary: #e5e7eb; /* 第四背景 */
+  --bg-elevated: #ffffff; /*  elevated 背景 */
+
   /* 文字颜色系统 */
   --text-primary: #111827; /* 主文字 */
-  --text-secondary: #4B5563; /* 次要文字 */
-  --text-tertiary: #9CA3AF; /* 第三文字 */
-  --text-light: #F9FAFB; /* 浅色文字 */
-  --text-inverse: #FFFFFF; /* 反色文字 */
-  
+  --text-secondary: #4b5563; /* 次要文字 */
+  --text-tertiary: #9ca3af; /* 第三文字 */
+  --text-light: #f9fafb; /* 浅色文字 */
+  --text-inverse: #ffffff; /* 反色文字 */
+
   /* 边框颜色 */
-  --border-color: #E5E7EB; /* 边框色 */
-  --border-light: #F3F4F6; /* 浅边框 */
-  --border-dark: #D1D5DB; /* 深边框 */
-  --border-focus: #8B5CF6; /* 聚焦边框色 */
-  
+  --border-color: #e5e7eb; /* 边框色 */
+  --border-light: #f3f4f6; /* 浅边框 */
+  --border-dark: #d1d5db; /* 深边框 */
+  --border-focus: #8b5cf6; /* 聚焦边框色 */
+
   /* 阴影系统 */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05); /* 小阴影 */
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 中阴影 */
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* 大阴影 */
-  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* 特大阴影 */
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* 中阴影 */
+  --shadow-lg:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* 大阴影 */
+  --shadow-xl:
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* 特大阴影 */
   --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25); /* 超大阴影 */
-  
+
   /* 圆角系统 */
   --radius-sm: 0.25rem; /* 小圆角 */
   --radius-md: 0.375rem; /* 中圆角 */
@@ -59,12 +62,12 @@
   --radius-xl: 0.75rem; /* 特大圆角 */
   --radius-2xl: 1rem; /* 超大圆角 */
   --radius-full: 9999px; /* 圆形 */
-  
+
   /* 动画系统 */
   --transition-fast: 0.15s ease-in-out; /* 快速动画 */
   --transition-normal: 0.25s ease-in-out; /* 正常动画 */
   --transition-slow: 0.35s ease-in-out; /* 慢速动画 */
-  
+
   /* 间距系统 */
   --space-1: 0.25rem; /* 4px */
   --space-2: 0.5rem; /* 8px */
@@ -80,8 +83,18 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -92,7 +105,8 @@ body {
 }
 
 code {
-  font-family: 'Fira Code', source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family:
+    "Fira Code", source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
 
@@ -101,18 +115,18 @@ code {
   .chat-container {
     flex-direction: column;
   }
-  
+
   .chat-sidebar {
     width: 100% !important;
     height: 40vh !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border-color) !important;
   }
-  
+
   .chat-main {
     height: 60vh !important;
   }
-  
+
   .config-panel {
     width: 100% !important;
     height: 100vh !important;
@@ -122,11 +136,11 @@ code {
     right: 0 !important;
     z-index: 100 !important;
   }
-  
+
   .message-item {
     max-width: 100% !important;
   }
-  
+
   .message-item .message-content {
     max-width: calc(100% - 52px) !important;
   }
@@ -181,8 +195,12 @@ code {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 页面加载动画 */
@@ -201,7 +219,10 @@ code {
 
 /* 自定义光标 */
 body {
-  cursor: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='8' stroke='%237E22CE' stroke-width='2'/%3E%3C/svg%3E") 10 10, auto;
+  cursor:
+    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='8' stroke='%237E22CE' stroke-width='2'/%3E%3C/svg%3E")
+      10 10,
+    auto;
 }
 
 a,
@@ -209,7 +230,10 @@ button,
 input,
 textarea,
 select {
-  cursor: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='6' fill='%237E22CE'/%3E%3C/svg%3E") 10 10, pointer;
+  cursor:
+    url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='6' fill='%237E22CE'/%3E%3C/svg%3E")
+      10 10,
+    pointer;
 }
 
 /* 主容器样式 */
@@ -481,7 +505,7 @@ select {
   .chat-sidebar {
     width: 280px !important;
   }
-  
+
   .config-panel {
     width: 280px !important;
   }
@@ -491,18 +515,18 @@ select {
   .main-content {
     flex-direction: column;
   }
-  
+
   .chat-sidebar {
     width: 100% !important;
     height: 40vh !important;
     border-right: none !important;
     border-bottom: 1px solid var(--border-color) !important;
   }
-  
+
   .chat-main {
     height: 60vh !important;
   }
-  
+
   .config-panel {
     width: 100% !important;
     height: 100vh !important;
@@ -513,15 +537,15 @@ select {
     z-index: 100 !important;
     box-shadow: var(--shadow-2xl) !important;
   }
-  
+
   .message-item {
     max-width: 100% !important;
   }
-  
+
   .message-item .message-content {
     max-width: calc(100% - 52px) !important;
   }
-  
+
   .header-title {
     font-size: 1.25rem !important;
   }
@@ -561,19 +585,32 @@ select {
   flex: 1;
   overflow-y: auto;
   padding: var(--space-6);
-  background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+  background: linear-gradient(
+    to bottom,
+    var(--bg-primary),
+    var(--bg-secondary)
+  );
   position: relative;
 }
 
 .messages-container::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle at 10% 20%, rgba(126, 34, 206, 0.02) 0%, transparent 20%),
-              radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.02) 0%, transparent 20%);
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(126, 34, 206, 0.02) 0%,
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(16, 185, 129, 0.02) 0%,
+      transparent 20%
+    );
   pointer-events: none;
   z-index: 0;
 }
@@ -648,8 +685,8 @@ select {
 }
 
 .user-message {
-  background: var(--primary-light);
-  color: white;
+  /* background: var(--primary-light); */
+  /* color: white; */
   border-color: var(--primary-color);
   box-shadow: 0 2px 4px rgba(126, 34, 206, 0.1);
 }
@@ -818,7 +855,7 @@ select {
 }
 
 .btn-danger:hover {
-  background: #DC2626;
+  background: #dc2626;
 }
 
 .btn-success {
@@ -1004,18 +1041,18 @@ select {
   .main-content {
     flex-direction: column;
   }
-  
+
   .chat-sidebar {
     width: 100%;
     height: 30vh;
     border-right: none;
     border-bottom: 1px solid var(--border-color);
   }
-  
+
   .chat-main {
     height: 70vh;
   }
-  
+
   .config-panel {
     width: 100%;
     height: 100vh;
@@ -1032,31 +1069,31 @@ select {
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-primary: #111827;
-    --bg-secondary: #1F2937;
+    --bg-secondary: #1f2937;
     --bg-tertiary: #374151;
-    --bg-quaternary: #4B5563;
-    --text-primary: #F9FAFB;
-    --text-secondary: #E5E7EB;
-    --text-tertiary: #9CA3AF;
+    --bg-quaternary: #4b5563;
+    --text-primary: #f9fafb;
+    --text-secondary: #e5e7eb;
+    --text-tertiary: #9ca3af;
     --border-color: #374151;
-    --border-light: #4B5563;
+    --border-light: #4b5563;
   }
-  
+
   body {
     background-color: var(--bg-secondary);
     color: var(--text-primary);
   }
-  
+
   .message-body {
     background: var(--bg-tertiary);
     border-color: var(--border-color);
   }
-  
+
   .user-message {
     background: var(--primary-dark);
     border-color: var(--primary-color);
   }
-  
+
   .input,
   .select,
   .textarea {
@@ -1064,48 +1101,61 @@ select {
     color: var(--text-primary);
     border-color: var(--border-color);
   }
-  
+
   .input:focus,
   .select:focus,
   .textarea:focus {
     background: var(--bg-secondary);
   }
-  
+
   .btn-secondary {
     background: var(--bg-tertiary);
     color: var(--text-primary);
     border-color: var(--border-color);
   }
-  
+
   .btn-secondary:hover {
     background: var(--bg-quaternary);
   }
-  
+
   .card {
     background: var(--bg-secondary);
     border-color: var(--border-color);
   }
-  
+
   .session-item:hover {
     background: var(--bg-tertiary);
   }
-  
+
   .session-item.active {
     background: rgba(126, 34, 206, 0.1);
   }
-  
+
   .empty-state-icon {
     background: var(--bg-tertiary);
     color: var(--text-tertiary);
   }
-  
+
   .messages-container {
-    background: linear-gradient(to bottom, var(--bg-primary), var(--bg-secondary));
+    background: linear-gradient(
+      to bottom,
+      var(--bg-primary),
+      var(--bg-secondary)
+    );
   }
-  
+
   .messages-container::before {
-    background: radial-gradient(circle at 10% 20%, rgba(126, 34, 206, 0.05) 0%, transparent 20%),
-                radial-gradient(circle at 90% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 20%);
+    background:
+      radial-gradient(
+        circle at 10% 20%,
+        rgba(126, 34, 206, 0.05) 0%,
+        transparent 20%
+      ),
+      radial-gradient(
+        circle at 90% 80%,
+        rgba(16, 185, 129, 0.05) 0%,
+        transparent 20%
+      );
   }
 }
 
@@ -1115,28 +1165,28 @@ select {
     background-color: white;
     color: black;
   }
-  
+
   .btn {
     display: none;
   }
-  
+
   .config-panel {
     display: none;
   }
-  
+
   .chat-sidebar {
     display: none;
   }
-  
+
   .message-input-container {
     display: none;
   }
-  
+
   .messages-container {
     height: auto;
     overflow: visible;
   }
-  
+
   .message-item {
     break-inside: avoid;
   }
@@ -1345,7 +1395,7 @@ pre {
 }
 
 code {
-  font-family: 'Fira Code', monospace;
+  font-family: "Fira Code", monospace;
   font-size: 0.875rem;
   line-height: 1.4;
 }
@@ -1376,7 +1426,8 @@ img {
 }
 
 /* 列表样式 */
-ul, ol {
+ul,
+ol {
   margin: var(--space-2) 0;
   padding-left: var(--space-6);
 }
@@ -1395,7 +1446,12 @@ blockquote {
 }
 
 /* 标题样式 */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 600;
   line-height: 1.2;
   margin: var(--space-4) 0 var(--space-2);
