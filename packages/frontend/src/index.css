@@ -82,6 +82,7 @@
   --space-20: 5rem; /* 80px */
 }
 
+html,
 body {
   font-family:
     "Inter",
@@ -102,6 +103,9 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   overflow-x: hidden;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 code {
@@ -215,6 +219,8 @@ code {
 
 #root {
   animation: pageLoad 0.5s ease-in-out;
+  height: 100%;
+  overflow: hidden;
 }
 
 /* 自定义光标 */
@@ -238,10 +244,11 @@ select {
 
 /* 主容器样式 */
 .app-container {
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: var(--bg-secondary);
+  overflow: hidden;
 }
 
 /* 头部样式 */
@@ -296,7 +303,8 @@ select {
   max-width: 1400px;
   margin: 0 auto;
   width: 100%;
-  min-height: calc(100vh - 80px);
+  height: 100%;
+  overflow: hidden;
 }
 
 /* 聊天侧边栏 */
@@ -308,6 +316,9 @@ select {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  min-height: 0;
+  flex-shrink: 0;
 }
 
 .sidebar-header {
@@ -470,6 +481,11 @@ select {
   overflow-y: auto;
   display: flex;
   flex-direction: column;
+  position: relative;
+  scroll-behavior: smooth;
+  /* 隐藏滚动条但保留滚动功能 */
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-tertiary) var(--bg-tertiary);
 }
 
 /* 滚动条增强 */
@@ -559,6 +575,8 @@ select {
   background: var(--bg-primary);
   position: relative;
   overflow: hidden;
+  height: 100%;
+  min-height: 0;
 }
 
 /* 聊天头部 */
@@ -583,7 +601,6 @@ select {
 /* 消息列表 */
 .messages-container {
   flex: 1;
-  overflow-y: auto;
   padding: var(--space-6);
   background: linear-gradient(
     to bottom,
@@ -591,6 +608,7 @@ select {
     var(--bg-secondary)
   );
   position: relative;
+  min-height: 0;
 }
 
 .messages-container::before {
@@ -768,6 +786,9 @@ select {
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  min-height: 0;
+  flex-shrink: 0;
 }
 
 .config-header {
