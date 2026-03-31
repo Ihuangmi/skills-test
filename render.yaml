@@ -3,7 +3,7 @@ services:
     name: chat-server
     runtime: node
     buildCommand: npm install -g pnpm && pnpm install
-    startCommand: cd packages/server && npx tsx src/index.ts
+    startCommand: pnpm --filter server exec tsx src/index.ts
     envVars:
       - key: NODE_ENV
         value: production
