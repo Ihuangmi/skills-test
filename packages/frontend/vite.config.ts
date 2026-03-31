@@ -14,4 +14,10 @@ export default defineConfig({
       },
     },
   },
+  define: {
+    // 生产环境的服务端 URL（部署时需要修改）
+    "process.env.VITE_SERVER_URL": JSON.stringify(
+      process.env.VITE_SERVER_URL || ""
+    ),
+  },
 });

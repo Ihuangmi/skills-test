@@ -8,8 +8,18 @@ import type {
   APIError,
 } from "../types";
 
-// 本地服务端API基础URL（使用相对路径，通过Vite代理访问）
-const API_BASE_URL = "/api/v1";
+// 获取API基础URL（开发环境用代理，生产环境用实际服务端地址）
+const getApiBaseUrl = () => {
+  // 生产环境：使用环境变量或直接指定服务端地址
+  if (import.meta.env.PROD) {
+    // 这里需要替换为你部署在 Render 上的服务端地址
+    return import.meta.env.VITE_SERVER_URL || "https://your-server.onrender.com/api/v1";
+  }
+  // 开发环境：使用 Vite 代理
+  return "/api/v1";
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 /**
  * 创建axios实例
