@@ -34,7 +34,7 @@ router.get('/', async (req: Request, res: Response) => {
         id: model.id,
         object: 'model',
         created: Math.floor(Date.now() / 1000),
-        owned_by: 'siliconflow',
+        owned_by: 'qwen',
       })),
     });
   } catch (error) {

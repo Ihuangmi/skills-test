@@ -26,7 +26,7 @@ const App: React.FC = () => {
             </Tooltip>
 
             <h1 className="header-title">
-              SiliconFlow Chat
+              通义千问 Chat
             </h1>
           </div>
 
