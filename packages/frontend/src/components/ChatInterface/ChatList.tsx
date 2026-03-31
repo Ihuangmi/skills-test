@@ -1,6 +1,6 @@
 // 会话列表组件
 import React, { useState } from 'react';
-import { Button, Tooltip, Popconfirm, Input, Modal, Statistic, Tag } from 'antd';
+import { Button, Tooltip, Popconfirm, Input, Modal, Statistic } from 'antd';
 import { PlusOutlined, DeleteOutlined, SearchOutlined, ExportOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useChat } from '../../hooks/useChat';
 import { searchSessions, exportSessionToMarkdown, exportAllSessions, getStorageStats } from '../../utils/storage';

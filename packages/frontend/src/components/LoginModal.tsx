@@ -142,7 +142,7 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                style={{ width: '100%', padding: '12px 16px', background: 'linear-gradient(to right, #4f46e5, #7c3aed)', color: 'white', fontSize: '16px', fontWeight: '600', borderRadius: '8px', cursor: 'pointer', border: 'none', transition: 'all 0.3s', opacity: isLoading ? 0.5 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
+                style={{ width: '100%', padding: '12px 16px', background: 'linear-gradient(to right, #4f46e5, #7c3aed)', color: 'white', fontSize: '16px', fontWeight: '600', borderRadius: '8px', border: 'none', transition: 'all 0.3s', opacity: isLoading ? 0.5 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
                 onMouseOver={(e) => {
                   if (!isLoading) {
                     e.currentTarget.style.transform = 'translateY(-2px)';

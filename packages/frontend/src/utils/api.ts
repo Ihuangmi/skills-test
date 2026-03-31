@@ -2,7 +2,6 @@
 import axios, { AxiosError } from "axios";
 import type {
   APIResponse,
-  StreamResponse,
   Message,
   ModelConfig,
   APIError,
