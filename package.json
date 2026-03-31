@@ -7,12 +7,12 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "pnpm --filter server exec tsx src/index.ts",
-    "dev:all": "pnpm -r dev",
+    "dev": "pnpm -r dev",
     "build": "pnpm -r build",
     "lint": "pnpm -r lint",
     "server": "pnpm --filter server dev",
-    "frontend": "pnpm --filter frontend dev"
+    "frontend": "pnpm --filter frontend dev",
+    "start": "pnpm --filter server exec tsx src/index.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
