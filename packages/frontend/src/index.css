@@ -343,6 +343,48 @@ select {
   color: var(--text-primary);
 }
 
+/* 侧边栏操作按钮区域 */
+.sidebar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/* 搜索框区域 */
+.sidebar-search {
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* 导出按钮区域 */
+.sidebar-export {
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.sidebar-export .ant-btn-link {
+  font-size: 0.75rem;
+  padding: var(--space-1) var(--space-2);
+  color: var(--text-secondary);
+}
+
+.sidebar-export .ant-btn-link:hover {
+  color: var(--primary-color);
+}
+
+/* 搜索徽章 */
+.search-badge {
+  font-size: 0.625rem;
+  background: var(--primary-color);
+  color: white;
+  padding: 1px 4px;
+  border-radius: var(--radius-sm);
+  margin-left: var(--space-1);
+}
+
 .sidebar-content {
   flex: 1;
   overflow-y: auto;

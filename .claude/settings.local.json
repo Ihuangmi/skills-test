@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(git clone:*)",
+      "Bash(command -v bun)",
+      "Bash(bun --version)",
+      "Bash(command -v node)",
+      "Bash(npm install:*)",
+      "Read(//c/Users/NPC254/.claude/skills/gstack/**)",
+      "Bash(./setup)"
+    ]
+  }
+}

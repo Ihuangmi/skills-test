@@ -1,9 +1,12 @@
 // 聊天逻辑钩子
 import { create } from 'zustand';
 import type { ChatSession, Message } from '../types';
-import { saveChatSessions, getChatSessions, saveCurrentSessionId, getCurrentSessionId } from '../utils/storage';
+import { saveChatSessions, getChatSessions, saveCurrentSessionId, getCurrentSessionId, initStorageVersion } from '../utils/storage';
 import { sendStreamChatRequest } from '../utils/api';
 import { useConfig } from './useConfig';
+
+// 初始化存储版本（首次使用时）
+initStorageVersion();
 
 interface ChatState {
   // 会话数据

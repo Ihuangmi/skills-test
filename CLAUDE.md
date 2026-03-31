@@ -219,3 +219,9 @@ A: 服务端使用 `tsx watch` 启动，支持热重载。可以添加 `console.
 
 ### Q: 如何添加新的 API 端点?
 A: 在 `packages/server/src/routes/` 中创建新的路由文件，并在 `src/index.ts` 中注册。
+
+## gstack
+
+使用 gstack 的 `/browse` 技能进行所有网页浏览操作，不要使用 `mcp__claude-in-chrome__*` 工具。
+
+可用技能：/office-hours, /plan-ceo-review, /plan-eng-review, /plan-design-review, /design-consultation, /design-shotgun, /design-html, /review, /ship, /land-and-deploy, /canary, /benchmark, /browse, /connect-chrome, /qa, /qa-only, /design-review, /setup-browser-cookies, /setup-deploy, /retro, /investigate, /document-release, /codex, /cso, /autoplan, /careful, /freeze, /guard, /unfreeze, /gstack-upgrade, /learn。
