@@ -72,7 +72,7 @@ const APIKeyInput: React.FC = () => {
           type={isVisible ? 'text' : 'password'}
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          placeholder="输入您的SiliconFlow API Key"
+          placeholder="输入您的阿里云百炼 API Key"
           style={{ flex: 1 }}
         />
         <Button

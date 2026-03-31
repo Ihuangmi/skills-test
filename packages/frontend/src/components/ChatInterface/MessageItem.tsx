@@ -8,9 +8,10 @@ import type { Message } from '../../types';
 
 interface MessageItemProps {
   message: Message;
+  modelName?: string;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
+const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
   const [copied, setCopied] = useState(false);
   
   // 复制消息内容
@@ -37,7 +38,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
     <div className={`message-item ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}>
       {/* 头像 */}
       <div className={`message-avatar ${message.role === 'user' ? 'user-avatar' : 'assistant-avatar'}`}>
-        {message.role === 'user' ? 'U' : 'A'}
+        {message.role === 'user' ? 'U' : (modelName ? modelName.charAt(0).toUpperCase() : 'A')}
       </div>
       
       {/* 消息内容 */}
@@ -45,7 +46,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message }) => {
         {/* 消息头部 */}
         <div className="message-header">
           <span className={`message-author ${message.role === 'user' ? 'user-author' : 'assistant-author'}`}>
-            {message.role === 'user' ? '你' : '助手'}
+            {message.role === 'user' ? '你' : modelName || '助手'}
           </span>
           <span className="message-time">{formatTime(message.timestamp)}</span>
         </div>

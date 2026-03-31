@@ -23,15 +23,16 @@ interface ConfigState {
 
 // 默认模型配置
 const DEFAULT_MODEL_CONFIG: ModelConfig = {
-  model: 'gpt-3.5-turbo',
+  model: 'qwen-turbo',
   temperature: 0.7,
   max_tokens: 1000,
 };
 
 // 默认可用模型
 const DEFAULT_AVAILABLE_MODELS = [
-  { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo' },
-  { id: 'gpt-4', name: 'GPT-4' },
+  { id: 'qwen-turbo', name: 'Qwen Turbo (免费)' },
+  { id: 'qwen-plus', name: 'Qwen Plus' },
+  { id: 'qwen-max', name: 'Qwen Max' },
 ];
 
 // 从本地存储加载配置

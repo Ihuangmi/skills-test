@@ -7,7 +7,7 @@ import MessageInput from './MessageInput';
 
 const ChatMain: React.FC = () => {
   const { getCurrentSession, error } = useChat();
-  const { apiKey } = useConfig();
+  const { apiKey, modelConfig } = useConfig();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
   
@@ -45,7 +45,7 @@ const ChatMain: React.FC = () => {
     return (
       <div className="messages-container">
         {currentSession.messages.map((message) => (
-          <MessageItem key={message.id} message={message} />
+          <MessageItem key={message.id} message={message} modelName={message.role === 'assistant' ? modelConfig.model : undefined} />
         ))}
         <div ref={messagesEndRef} />
       </div>
@@ -75,7 +75,7 @@ const ChatMain: React.FC = () => {
       <div className="empty-state">
         <div className="empty-state-icon">🔑</div>
         <h3 className="empty-state-title">请先设置API Key</h3>
-        <p className="empty-state-description">在配置面板中输入您的SiliconFlow API Key</p>
+        <p className="empty-state-description">在配置面板中输入您的阿里云百炼 API Key</p>
       </div>
     );
   };

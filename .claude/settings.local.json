@@ -8,7 +8,8 @@
       "Bash(command -v node)",
       "Bash(npm install:*)",
       "Read(//c/Users/NPC254/.claude/skills/gstack/**)",
-      "Bash(./setup)"
+      "Bash(./setup)",
+      "Bash(curl:*)"
     ]
   }
 }

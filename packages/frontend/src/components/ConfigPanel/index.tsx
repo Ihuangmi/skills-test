@@ -30,7 +30,7 @@ const ConfigPanel: React.FC = () => {
           <h3 className="config-section-title">关于</h3>
           <div className="card">
             <p className="config-about-text">
-              这是一个基于React的类OpenAI聊天界面，支持与SiliconFlow平台的API交互。
+              这是一个基于React的类OpenAI聊天界面，支持与阿里云百炼（通义千问）平台的API交互。
             </p>
             <p className="config-about-version">
               版本: 1.0.0
