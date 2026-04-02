@@ -66,18 +66,18 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
 
   return (
     <div
-      style={{ position: 'fixed', inset: 0, zIndex: 9999, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '16px' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdropClick}
     >
-      <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0, 0, 0, 0.5)', backdropFilter: 'blur(4px)' }} />
+      <div className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
 
-      <div style={{ position: 'relative', width: '100%', maxWidth: '448px' }}>
-        <div style={{ backgroundColor: 'white', borderRadius: '16px', boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)', overflow: 'hidden', border: '1px solid #e5e7eb' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '24px', borderBottom: '1px solid #e5e7eb' }}>
-            <h2 style={{ fontSize: '24px', fontWeight: 'bold', color: '#111827', margin: 0 }}>登录</h2>
+      <div className="relative w-full max-w-md">
+        <div className="bg-white rounded-xl shadow-2xl overflow-hidden border border-gray-200">
+          <div className="flex justify-between items-center p-6 border-b border-gray-200">
+            <h2 className="text-2xl font-bold text-gray-900">登录</h2>
             <button
               onClick={onClose}
-              style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#6b7280', padding: '4px', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              className="bg-transparent border-0 cursor-pointer text-gray-500 p-1 rounded-md flex items-center justify-center hover:bg-gray-100 transition-colors"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18"></line>
@@ -86,10 +86,10 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          <div style={{ padding: '24px' }}>
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <div className="p-6">
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
               <div>
-                <label htmlFor="email" style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '8px' }}>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                   邮箱地址
                 </label>
                 <input
@@ -99,14 +99,12 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="your@email.com"
-                  style={{ width: '100%', padding: '12px 16px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px', outline: 'none', transition: 'border-color 0.2s' }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#6366f1'}
-                  onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-indigo-500"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" style={{ display: 'block', fontSize: '14px', fontWeight: '500', color: '#374151', marginBottom: '8px' }}>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                   密码
                 </label>
                 <input
@@ -115,25 +113,23 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="•••••••"
-                  style={{ width: '100%', padding: '12px 16px', border: '1px solid #d1d5db', borderRadius: '8px', fontSize: '14px', outline: 'none', transition: 'border-color 0.2s' }}
-                  onFocus={(e) => e.currentTarget.style.borderColor = '#6366f1'}
-                  onBlur={(e) => e.currentTarget.style.borderColor = '#d1d5db'}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-sm outline-none transition-colors focus:border-indigo-500"
                 />
               </div>
 
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                <div style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center">
                   <input
                     id="remember-me"
                     type="checkbox"
-                    style={{ height: '16px', width: '16px', marginRight: '8px', cursor: 'pointer' }}
+                    className="h-4 w-4 mr-2 cursor-pointer"
                   />
-                  <label htmlFor="remember-me" style={{ fontSize: '14px', color: '#374151', cursor: 'pointer' }}>
+                  <label htmlFor="remember-me" className="text-sm text-gray-700 cursor-pointer">
                     记住我
                   </label>
                 </div>
-                <div style={{ fontSize: '14px' }}>
-                  <a href="#" style={{ color: '#6366f1', textDecoration: 'none', fontWeight: '500' }}>
+                <div className="text-sm">
+                  <a href="#" className="text-indigo-600 text-decoration-none font-medium hover:text-indigo-500">
                     忘记密码？
                   </a>
                 </div>
@@ -142,56 +138,46 @@ const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
               <button
                 type="submit"
                 disabled={isLoading}
-                style={{ width: '100%', padding: '12px 16px', background: 'linear-gradient(to right, #4f46e5, #7c3aed)', color: 'white', fontSize: '16px', fontWeight: '600', borderRadius: '8px', border: 'none', transition: 'all 0.3s', opacity: isLoading ? 0.5 : 1, cursor: isLoading ? 'not-allowed' : 'pointer' }}
-                onMouseOver={(e) => {
-                  if (!isLoading) {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 10px 25px -5px rgba(79, 70, 229, 0.4)';
-                  }
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
-                }}
+                className="w-full px-4 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 text-white text-base font-semibold rounded-lg border-0 transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none disabled:hover:translate-y-0"
               >
                 {isLoading ? '登录中...' : '登录'}
               </button>
             </form>
 
-            <div style={{ marginTop: '24px' }}>
-              <div style={{ position: 'relative', marginBottom: '24px' }}>
-                <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center' }}>
-                  <div style={{ width: '100%', borderTop: '1px solid #e5e7eb' }}></div>
+            <div className="mt-6">
+              <div className="relative mb-6">
+                <div className="absolute inset-0 flex items-center">
+                  <div className="w-full border-t border-gray-200"></div>
                 </div>
-                <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
-                  <span style={{ padding: '0 16px', backgroundColor: 'white', fontSize: '14px', color: '#6b7280' }}>
+                <div className="relative flex justify-center">
+                  <span className="px-4 bg-white text-sm text-gray-500">
                     或使用以下方式登录
                   </span>
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginTop: '24px' }}>
-                <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 16px', border: '1px solid #e5e7eb', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.3s', fontSize: '14px', color: '#374151' }}>
+              <div className="grid grid-cols-2 gap-3 mt-6">
+                <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 rounded-lg cursor-pointer transition-all duration-300 text-sm text-gray-700 hover:bg-gray-50">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path>
                     <path d="M9 18c-4.51 2-5-2-7-2"></path>
                   </svg>
-                  <span style={{ fontWeight: '500' }}>GitHub</span>
+                  <span className="font-medium">GitHub</span>
                 </button>
-                <button style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '12px 16px', border: '1px solid #e5e7eb', borderRadius: '8px', cursor: 'pointer', transition: 'all 0.3s', fontSize: '14px', color: '#374151' }}>
+                <button className="flex items-center justify-center gap-2 px-4 py-3 border border-gray-200 rounded-lg cursor-pointer transition-all duration-300 text-sm text-gray-700 hover:bg-gray-50">
                   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"></circle>
                     <line x1="2" y1="12" x2="22" y2="12"></line>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10 15.3 15.3 0 0 1 4-10z"></path>
                   </svg>
-                  <span style={{ fontWeight: '500' }}>Google</span>
+                  <span className="font-medium">Google</span>
                 </button>
               </div>
             </div>
 
-            <p style={{ marginTop: '24px', textAlign: 'center', fontSize: '14px', color: '#6b7280' }}>
+            <p className="mt-6 text-center text-sm text-gray-500">
               还没有账号？{' '}
-              <a href="#" style={{ color: '#4f46e5', textDecoration: 'none', fontWeight: '500' }}>
+              <a href="#" className="text-indigo-600 text-decoration-none font-medium hover:text-indigo-500">
                 立即注册
               </a>
             </p>

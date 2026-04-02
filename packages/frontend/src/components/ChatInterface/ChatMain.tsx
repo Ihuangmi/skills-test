@@ -34,20 +34,23 @@ const ChatMain: React.FC = () => {
     
     if (currentSession.messages.length === 0) {
       return (
-        <div className="empty-state">
-          <div className="empty-state-icon">💬</div>
-          <h3 className="empty-state-title">开始聊天吧！</h3>
-          <p className="empty-state-description">输入您的问题，获取AI的回答</p>
+        <div className="flex flex-col items-center justify-center h-full p-12 text-center">
+          <div className="w-16 h-16 rounded-full bg-bg-tertiary flex items-center justify-center text-2xl text-text-tertiary mb-4">💬</div>
+          <h3 className="text-lg font-semibold text-text-primary mb-2">开始聊天吧！</h3>
+          <p className="text-sm text-text-secondary max-w-[300px]">输入您的问题，获取AI的回答</p>
         </div>
       );
     }
     
     return (
-      <div className="messages-container">
-        {currentSession.messages.map((message) => (
-          <MessageItem key={message.id} message={message} modelName={message.role === 'assistant' ? modelConfig.model : undefined} />
-        ))}
-        <div ref={messagesEndRef} />
+      <div className="flex-1 p-6 bg-gradient-to-b from-bg-primary to-bg-secondary relative min-h-0">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(126,34,206,0.02)_0%,transparent_20%),radial-gradient(circle_at_90%_80%,rgba(16,185,129,0.02)_0%,transparent_20%)] pointer-events-none z-0"></div>
+        <div className="relative z-10">
+          {currentSession.messages.map((message) => (
+            <MessageItem key={message.id} message={message} modelName={message.role === 'assistant' ? modelConfig.model : undefined} />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
       </div>
     );
   };
@@ -57,11 +60,11 @@ const ChatMain: React.FC = () => {
     if (!error) return null;
     
     return (
-      <div className="error-notification">
-        <div className="error-icon">⚠️</div>
-        <div className="error-content">
-          <h4 className="error-title">错误</h4>
-          <p className="error-message">{error}</p>
+      <div className="bg-error/5 border border-error rounded-lg p-3 m-4 flex items-start gap-3">
+        <div className="text-error flex-shrink-0 mt-1">⚠️</div>
+        <div className="flex-1">
+          <h4 className="text-sm font-semibold text-error mb-1">错误</h4>
+          <p className="text-sm text-text-secondary">{error}</p>
         </div>
       </div>
     );
@@ -72,19 +75,19 @@ const ChatMain: React.FC = () => {
     if (apiKey) return null;
     
     return (
-      <div className="empty-state">
-        <div className="empty-state-icon">🔑</div>
-        <h3 className="empty-state-title">请先设置API Key</h3>
-        <p className="empty-state-description">在配置面板中输入您的阿里云百炼 API Key</p>
+      <div className="flex flex-col items-center justify-center h-full p-12 text-center">
+        <div className="w-16 h-16 rounded-full bg-bg-tertiary flex items-center justify-center text-2xl text-text-tertiary mb-4">🔑</div>
+        <h3 className="text-lg font-semibold text-text-primary mb-2">请先设置API Key</h3>
+        <p className="text-sm text-text-secondary max-w-[300px]">在配置面板中输入您的阿里云百炼 API Key</p>
       </div>
     );
   };
   
   return (
-    <div className="chat-main">
+    <div className="flex-1 flex flex-col bg-bg-primary relative overflow-hidden h-full min-h-0">
       {/* 聊天头部 */}
-      <div className="chat-header">
-        <h2 className="chat-header-title">
+      <div className="p-4 border-b border-border-default sticky top-0 bg-bg-primary z-10 flex justify-between items-center">
+        <h2 className="text-lg font-semibold text-text-primary">
           {currentSession?.title || '新会话'}
         </h2>
       </div>
@@ -95,7 +98,7 @@ const ChatMain: React.FC = () => {
       {/* 消息列表 */}
       <div 
         ref={chatContainerRef}
-        className="chat-messages"
+        className="flex-1 overflow-y-auto flex flex-col scrollbar-thin scrollbar-thumb-text-tertiary scrollbar-track-bg-tertiary"
       >
         {apiKey ? renderMessages() : renderAPIKeyPrompt()}
       </div>

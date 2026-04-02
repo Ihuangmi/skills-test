@@ -28,7 +28,7 @@ const APIKeyInput: React.FC = () => {
     try {
       setAPIKey(inputValue.trim());
       message.success('API Key保存成功');
-    } catch (error) {
+    } catch {
       message.error('保存失败');
     } finally {
       setIsSaving(false);
@@ -43,13 +43,13 @@ const APIKeyInput: React.FC = () => {
   };
   
   return (
-    <div style={{ marginBottom: '24px' }}>
-      <Text strong style={{ display: 'block', marginBottom: '8px' }}>API Key</Text>
-      <div style={{ display: 'flex', gap: '8px' }}>
+    <div className="mb-6">
+      <Text strong className="block mb-2">API Key</Text>
+      <div className="flex gap-2">
         <Input
           prefix={<LockOutlined />}
           suffix={
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <div className="flex items-center gap-2">
               <Tooltip title={isVisible ? '隐藏' : '显示'}>
                 <Button
                   type="text"
@@ -73,7 +73,7 @@ const APIKeyInput: React.FC = () => {
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           placeholder="输入您的阿里云百炼 API Key"
-          style={{ flex: 1 }}
+          className="flex-1"
         />
         <Button
           type="primary"
@@ -84,7 +84,7 @@ const APIKeyInput: React.FC = () => {
           保存
         </Button>
       </div>
-      <Text type="secondary" style={{ fontSize: '12px', marginTop: '8px', display: 'block' }}>
+      <Text type="secondary" className="text-xs mt-2 block">
         API Key将保存在本地存储中，不会上传到服务器
       </Text>
     </div>

@@ -13,7 +13,7 @@ interface MessageItemProps {
 
 const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
   const [copied, setCopied] = useState(false);
-  
+
   // 复制消息内容
   const handleCopy = async () => {
     try {
@@ -24,7 +24,7 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
       console.error('复制失败:', error);
     }
   };
-  
+
   // 格式化时间
   const formatTime = (timestamp: number) => {
     const date = new Date(timestamp);
@@ -33,68 +33,116 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
       minute: '2-digit',
     });
   };
-  
+
   return (
-    <div className={`message-item ${message.role === 'user' ? 'user-message' : 'assistant-message'}`}>
+    <div className={`flex mb-4 relative z-10 animate-fade-in`}>
       {/* 头像 */}
-      <div className={`message-avatar ${message.role === 'user' ? 'user-avatar' : 'assistant-avatar'}`}>
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold mr-3 flex-shrink-0 ${message.role === 'user' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}>
         {message.role === 'user' ? 'U' : (modelName ? modelName.charAt(0).toUpperCase() : 'A')}
       </div>
-      
+
       {/* 消息内容 */}
-      <div className="message-content">
+      <div className="flex-1 max-w-[70%]">
         {/* 消息头部 */}
-        <div className="message-header">
-          <span className={`message-author ${message.role === 'user' ? 'user-author' : 'assistant-author'}`}>
+        <div className="flex items-center mb-1">
+          <span className={`text-sm font-semibold mr-2 ${message.role === 'user' ? 'text-primary' : 'text-secondary'}`}>
             {message.role === 'user' ? '你' : modelName || '助手'}
           </span>
-          <span className="message-time">{formatTime(message.timestamp)}</span>
+          <span className="text-xs text-text-tertiary">{formatTime(message.timestamp)}</span>
         </div>
-        
+
         {/* 消息主体 */}
-        <div className={`message-body ${message.role === 'user' ? 'user-message' : ''}`}>
+        <div className={`bg-bg-secondary rounded-lg p-3 shadow-sm border ${message.role === 'user' ? 'border-primary shadow-[0_2px_4px_rgba(126,34,206,0.1)]' : 'border-border-default'}`}>
           <ReactMarkdown
             rehypePlugins={[rehypeHighlight]}
             components={{
               code: ({ className, children, ...props }) => {
                 const match = /language-(\w+)/.exec(className || '');
                 return match ? (
-                  <pre>
+                  <pre className="bg-bg-tertiary rounded-md p-3 overflow-x-auto my-2 border border-border-default">
                     <code className={className} {...props}>
                       {children}
                     </code>
                   </pre>
                 ) : (
-                  <code className={className} {...props}>
+                  <code className={`${className} bg-bg-tertiary rounded px-1 py-0.5`} {...props}>
                     {children}
                   </code>
                 );
               },
+              a: ({ children, href, ...props }) => (
+                <a href={href} className="text-primary hover:text-primary-light hover:underline" {...props}>
+                  {children}
+                </a>
+              ),
+              blockquote: ({ children, ...props }) => (
+                <blockquote className="border-l-4 border-primary pl-3 my-3 text-text-secondary italic" {...props}>
+                  {children}
+                </blockquote>
+              ),
+              h1: ({ children, ...props }) => (
+                <h1 className="text-2xl font-semibold my-4 text-text-primary" {...props}>
+                  {children}
+                </h1>
+              ),
+              h2: ({ children, ...props }) => (
+                <h2 className="text-xl font-semibold my-3 text-text-primary" {...props}>
+                  {children}
+                </h2>
+              ),
+              h3: ({ children, ...props }) => (
+                <h3 className="text-lg font-semibold my-2 text-text-primary" {...props}>
+                  {children}
+                </h3>
+              ),
+              ul: ({ children, ...props }) => (
+                <ul className="my-2 pl-6 list-disc" {...props}>
+                  {children}
+                </ul>
+              ),
+              ol: ({ children, ...props }) => (
+                <ol className="my-2 pl-6 list-decimal" {...props}>
+                  {children}
+                </ol>
+              ),
+              li: ({ children, ...props }) => (
+                <li className="mb-1" {...props}>
+                  {children}
+                </li>
+              ),
+              p: ({ children, ...props }) => (
+                <p className="mb-3 leading-relaxed" {...props}>
+                  {children}
+                </p>
+              ),
+              img: ({ src, alt, ...props }) => (
+                <img src={src} alt={alt} className="max-w-full rounded-md my-2" {...props} />
+              ),
             }}
           >
             {message.content}
           </ReactMarkdown>
         </div>
-        
+
         {/* 消息统计和操作 */}
-        <div className="message-footer">
+        <div className="flex justify-between items-center mt-2">
           {/* 消息统计 */}
-          <div className="message-stats">
+          <div className="flex items-center gap-3 text-xs text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-fast">
             {message.time && (
-              <span className="message-stat-item">响应时间: {message.time}ms</span>
+              <span>响应时间: {message.time}ms</span>
             )}
             {message.tokens && (
-              <span className="message-stat-item">Tokens: {message.tokens}</span>
+              <span>Tokens: {message.tokens}</span>
             )}
           </div>
-          
+
           {/* 复制按钮 */}
           <Tooltip title={copied ? '已复制!' : '复制内容'}>
-            <Button 
-              type="text" 
-              size="small" 
+            <Button
+              type="text"
+              size="small"
               onClick={handleCopy}
-              className="message-copy-btn"
+              className="text-xs"
             >
               {copied ? '已复制' : '复制'}
             </Button>

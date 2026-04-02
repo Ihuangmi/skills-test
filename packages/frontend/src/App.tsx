@@ -12,31 +12,31 @@ const App: React.FC = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   return (
-    <div className="app-container">
-      <header className="app-header">
-        <div className="header-content">
-          <div className="header-left">
+    <div className="h-screen flex flex-col bg-bg-secondary overflow-hidden">
+      <header className="bg-bg-primary shadow-sm sticky top-0 z-10 p-4 px-6 transition-all duration-normal hover:shadow-md">
+        <div className="flex items-center justify-between max-w-[1400px] mx-auto w-full">
+          <div className="flex items-center gap-4">
             <Tooltip title={showChatList ? '隐藏会话列表' : '显示会话列表'}>
               <Button
                 type="text"
                 icon={showChatList ? <MenuFoldOutlined /> : <MenuOutlined />}
                 onClick={() => setShowChatList(!showChatList)}
-                className="header-btn"
+                className="text-text-secondary hover:text-primary transition-all duration-fast text-base"
               />
             </Tooltip>
 
-            <h1 className="header-title">
+            <h1 className="text-xl font-bold text-primary flex items-center gap-2">
               通义千问 Chat
             </h1>
           </div>
 
-          <div className="header-actions">
+          <div className="flex items-center gap-3">
             <Tooltip title="登录">
               <Button
                 type="text"
                 icon={<UserOutlined />}
                 onClick={() => setShowLoginModal(true)}
-                className="header-btn"
+                className="text-text-secondary hover:text-primary transition-all duration-fast text-base"
               />
             </Tooltip>
 
@@ -45,24 +45,25 @@ const App: React.FC = () => {
                 type="text"
                 icon={<SettingOutlined />}
                 onClick={() => setShowConfigPanel(!showConfigPanel)}
-                className="header-btn"
+                className="text-text-secondary hover:text-primary transition-all duration-fast text-base"
               />
             </Tooltip>
           </div>
         </div>
       </header>
 
-      <main className="main-content">
+      <main className="flex-1 flex max-w-[1400px] mx-auto w-full h-full overflow-hidden">
         {showChatList && (
           <ChatList />
         )}
 
         <ChatMain />
-
-        {showConfigPanel && (
-          <ConfigPanel />
-        )}
       </main>
+
+      <ConfigPanel
+        isOpen={showConfigPanel}
+        onClose={() => setShowConfigPanel(false)}
+      />
 
       <LoginModal
         isOpen={showLoginModal}
