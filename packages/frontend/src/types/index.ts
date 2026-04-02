@@ -1,11 +1,20 @@
 // 消息类型
 export interface Message {
   id: string;
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: number;
   tokens?: number;
   time?: number;
+}
+
+// 角色预设类型
+export interface Role {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  systemPrompt: string;
 }
 
 // 会话类型
@@ -15,6 +24,7 @@ export interface ChatSession {
   messages: Message[];
   createdAt: number;
   updatedAt: number;
+  role?: string; // 关联的角色 ID
 }
 
 // 模型配置类型

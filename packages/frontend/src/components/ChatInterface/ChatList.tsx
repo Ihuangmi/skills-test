@@ -1,9 +1,11 @@
 // 会话列表组件
 import React, { useState } from 'react';
-import { Button, Tooltip, Popconfirm, Input, Modal, Statistic } from 'antd';
+import { Button, Tooltip, Popconfirm, Input, Modal, Statistic, Dropdown } from 'antd';
+import type { MenuProps } from 'antd';
 import { PlusOutlined, DeleteOutlined, SearchOutlined, ExportOutlined, InfoCircleOutlined } from '@ant-design/icons';
 import { useChat } from '../../hooks/useChat';
 import { searchSessions, exportSessionToMarkdown, exportAllSessions, getStorageStats } from '../../utils/storage';
+import { PRESET_ROLES, getRoleById } from '../../utils/roles';
 
 const ChatList: React.FC = () => {
   const {
@@ -20,6 +22,18 @@ const ChatList: React.FC = () => {
 
   // 导出和统计弹窗
   const [showStatsModal, setShowStatsModal] = useState(false);
+
+  // 角色选择菜单
+  const handleCreateSessionWithRole: MenuProps['onClick'] = ({ key }) => {
+    createSession(key);
+  };
+
+  const roleMenuItems: MenuProps['items'] = PRESET_ROLES.map((role) => ({
+    key: role.id,
+    label: role.name,
+    icon: role.icon,
+    description: role.description,
+  }));
 
   // 格式化时间
   const formatTime = (timestamp: number) => {
@@ -104,14 +118,19 @@ const ChatList: React.FC = () => {
               size="small"
             />
           </Tooltip>
-          <Tooltip title="新建会话">
-            <Button
-              type="primary"
-              icon={<PlusOutlined />}
-              onClick={createSession}
-              shape="circle"
-              className="bg-primary hover:bg-primary-dark"
-            />
+          <Tooltip title="新建会话 (带角色选择)">
+            <Dropdown
+              menu={{ items: roleMenuItems, onClick: handleCreateSessionWithRole }}
+              placement="bottomRight"
+              trigger={['click']}
+            >
+              <Button
+                type="primary"
+                icon={<PlusOutlined />}
+                shape="circle"
+                className="bg-primary hover:bg-primary-dark"
+              />
+            </Dropdown>
           </Tooltip>
         </div>
       </div>
@@ -168,8 +187,9 @@ const ChatList: React.FC = () => {
             </p>
           </div>
         ) : (
-          displayedSessions.map((session: { id: string; title: string; updatedAt: number; preview: string; isSearchResult: boolean }) => {
+          displayedSessions.map((session: { id: string; title: string; updatedAt: number; preview: string; isSearchResult: boolean; role?: string }) => {
             const isCurrentSession = session.id === currentSessionId;
+            const role = getRoleById(session.role || 'general');
 
             return (
               <div
@@ -179,7 +199,8 @@ const ChatList: React.FC = () => {
               >
                 {/* 会话标题和时间 */}
                 <div className="flex justify-between items-center mb-1">
-                  <h4 className="font-semibold text-text-primary text-sm leading-relaxed">
+                  <h4 className="font-semibold text-text-primary text-sm leading-relaxed flex items-center gap-1">
+                    {role && <span className="text-xs" title={role.name}>{role.icon}</span>}
                     {session.title}
                     {session.isSearchResult && (
                       <span className="ml-1 text-xs bg-primary text-white px-1 py-0.5 rounded-sm">搜索结果</span>

@@ -10,6 +10,7 @@ import {
 } from "../utils/storage";
 import { sendStreamChatRequest } from "../utils/api";
 import { useConfig } from "./useConfig";
+import { getRoleById } from "../utils/roles";
 
 // 初始化存储版本（首次使用时）
 initStorageVersion();
@@ -25,7 +26,7 @@ interface ChatState {
   error: string | null;
 
   // 操作
-  createSession: () => ChatSession;
+  createSession: (roleId?: string) => ChatSession;
   switchSession: (sessionId: string) => void;
   deleteSession: (sessionId: string) => void;
   sendMessage: (content: string) => Promise<void>;
@@ -97,13 +98,15 @@ export const useChat = create<ChatState>((set, get) => {
     },
 
     // 创建新会话
-    createSession: () => {
+    createSession: (roleId?: string) => {
+      const role = getRoleById(roleId || "general");
       const newSession: ChatSession = {
         id: generateId(),
-        title: "新会话",
+        title: role ? `${role.icon} 新会话` : "新会话",
         messages: [],
         createdAt: Date.now(),
         updatedAt: Date.now(),
+        role: roleId || "general",
       };
 
       const newSessions = [...get().sessions, newSession];
@@ -211,10 +214,24 @@ export const useChat = create<ChatState>((set, get) => {
       // 记录开始时间
       const startTime = Date.now();
 
+      // 获取当前会话的角色并注入 system message
+      const role = getRoleById(updatedSession.role || "general");
+      const messagesWithSystem: Message[] = role
+        ? [
+            {
+              id: generateId(),
+              role: "system",
+              content: role.systemPrompt,
+              timestamp: Date.now(),
+            },
+            ...updatedSession.messages,
+          ]
+        : updatedSession.messages;
+
       // 发送流式请求
       abortStreaming = sendStreamChatRequest(
         apiKey,
-        updatedSession.messages,
+        messagesWithSystem,
         modelConfig,
         (chunk) => {
           // 更新助手消息内容
