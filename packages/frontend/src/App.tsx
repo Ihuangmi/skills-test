@@ -26,7 +26,7 @@ const App: React.FC = () => {
             </Tooltip>
 
             <h1 className="text-xl font-bold text-primary flex items-center gap-2">
-              通义千问 Chat
+              Chat
             </h1>
           </div>
 

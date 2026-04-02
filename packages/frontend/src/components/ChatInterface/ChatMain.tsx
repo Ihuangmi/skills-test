@@ -10,28 +10,28 @@ const ChatMain: React.FC = () => {
   const { apiKey, modelConfig } = useConfig();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  
+
   const currentSession = getCurrentSession();
-  
+
   // 滚动到底部
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-  
+
   // 当消息列表变化时，滚动到底部
   useEffect(() => {
     scrollToBottom();
   }, [currentSession?.messages]);
-  
+
   // 当会话切换时，滚动到底部
   useEffect(() => {
     scrollToBottom();
   }, [currentSession?.id]);
-  
+
   // 渲染消息列表
   const renderMessages = () => {
     if (!currentSession) return null;
-    
+
     if (currentSession.messages.length === 0) {
       return (
         <div className="flex flex-col items-center justify-center h-full p-12 text-center">
@@ -41,9 +41,9 @@ const ChatMain: React.FC = () => {
         </div>
       );
     }
-    
+
     return (
-      <div className="flex-1 p-6 bg-gradient-to-b from-bg-primary to-bg-secondary relative min-h-0">
+      <div className="flex-1 p-6 bg-gradient-to-b from-bg-primary to-bg-secondary relative">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(126,34,206,0.02)_0%,transparent_20%),radial-gradient(circle_at_90%_80%,rgba(16,185,129,0.02)_0%,transparent_20%)] pointer-events-none z-0"></div>
         <div className="relative z-10">
           {currentSession.messages.map((message) => (
@@ -54,11 +54,11 @@ const ChatMain: React.FC = () => {
       </div>
     );
   };
-  
+
   // 渲染错误提示
   const renderError = () => {
     if (!error) return null;
-    
+
     return (
       <div className="bg-error/5 border border-error rounded-lg p-3 m-4 flex items-start gap-3">
         <div className="text-error flex-shrink-0 mt-1">⚠️</div>
@@ -69,11 +69,11 @@ const ChatMain: React.FC = () => {
       </div>
     );
   };
-  
+
   // 渲染API Key未设置提示
   const renderAPIKeyPrompt = () => {
     if (apiKey) return null;
-    
+
     return (
       <div className="flex flex-col items-center justify-center h-full p-12 text-center">
         <div className="w-16 h-16 rounded-full bg-bg-tertiary flex items-center justify-center text-2xl text-text-tertiary mb-4">🔑</div>
@@ -82,7 +82,7 @@ const ChatMain: React.FC = () => {
       </div>
     );
   };
-  
+
   return (
     <div className="flex-1 flex flex-col bg-bg-primary relative overflow-hidden h-full min-h-0">
       {/* 聊天头部 */}
@@ -91,18 +91,19 @@ const ChatMain: React.FC = () => {
           {currentSession?.title || '新会话'}
         </h2>
       </div>
-      
+
       {/* 错误提示 */}
       {renderError()}
-      
+
       {/* 消息列表 */}
-      <div 
+      <div
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto flex flex-col scrollbar-thin scrollbar-thumb-text-tertiary scrollbar-track-bg-tertiary"
       >
-        {apiKey ? renderMessages() : renderAPIKeyPrompt()}
+        {/*{apiKey ? renderMessages() : renderAPIKeyPrompt()}*/}
+        {renderMessages()}
       </div>
-      
+
       {/* 消息输入框 */}
       <MessageInput disabled={!apiKey} />
     </div>

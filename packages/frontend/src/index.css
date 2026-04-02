@@ -42,6 +42,7 @@ code {
 #root {
   height: 100%;
   overflow: hidden;
+  font-size: 14px;
 }
 
 /* 滚动条样式 */
@@ -70,11 +71,11 @@ code {
   ::-webkit-scrollbar-track {
     background: #374151;
   }
-  
+
   ::-webkit-scrollbar-thumb {
     background: #9ca3af;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
     background: #d1d5db;
   }
@@ -85,20 +86,20 @@ code {
   .config-panel {
     display: none;
   }
-  
+
   .chat-sidebar {
     display: none;
   }
-  
+
   .message-input-container {
     display: none;
   }
-  
+
   .messages-container {
     height: auto;
     overflow: visible;
   }
-  
+
   .message-item {
     break-inside: avoid;
   }
@@ -109,30 +110,30 @@ code {
   .scrollbar-thin {
     scrollbar-width: thin;
   }
-  
+
   .scrollbar-thumb-text-tertiary {
     scrollbar-color: #9ca3af #f3f4f6;
   }
-  
+
   .scrollbar-track-bg-tertiary {
     scrollbar-track-color: #f3f4f6;
   }
-  
+
   .line-clamp-1 {
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
   .text-shadow-sm {
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
   }
-  
+
   .bg-gradient-chat {
     background: linear-gradient(to bottom, #ffffff, #f9fafb);
   }
-  
+
   @media (prefers-color-scheme: dark) {
     .bg-gradient-chat {
       background: linear-gradient(to bottom, #111827, #1f2937);
@@ -181,4 +182,3 @@ code {
 .animate-page-load {
   animation: pageLoad 0.5s ease-in-out;
 }
-  

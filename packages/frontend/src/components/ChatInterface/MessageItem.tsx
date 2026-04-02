@@ -34,10 +34,32 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
     });
   };
 
+  // 格式化响应时间（毫秒转时分秒）
+  const formatResponseTime = (ms: number): string => {
+    if (ms < 1000) {
+      return `${ms}ms`;
+    }
+
+    const seconds = Math.floor(ms / 1000);
+    const minutes = Math.floor(seconds / 60);
+    const hours = Math.floor(minutes / 60);
+
+    if (hours > 0) {
+      const remainingMinutes = minutes % 60;
+      const remainingSeconds = seconds % 60;
+      return `${hours}时${remainingMinutes}分${remainingSeconds}秒`;
+    } else if (minutes > 0) {
+      const remainingSeconds = seconds % 60;
+      return `${minutes}分${remainingSeconds}秒`;
+    } else {
+      return `${seconds}秒`;
+    }
+  };
+
   return (
-    <div className={`flex mb-4 relative z-10 animate-fade-in`}>
+    <div className={`flex mb-4 relative z-10`}>
       {/* 头像 */}
-      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold mr-3 flex-shrink-0 ${message.role === 'user' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}>
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center text-[14px] font-semibold mr-3 flex-shrink-0 ${message.role === 'user' ? 'bg-primary text-white' : 'bg-secondary text-white'}`}>
         {message.role === 'user' ? 'U' : (modelName ? modelName.charAt(0).toUpperCase() : 'A')}
       </div>
 
@@ -45,14 +67,14 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
       <div className="flex-1 max-w-[70%]">
         {/* 消息头部 */}
         <div className="flex items-center mb-1">
-          <span className={`text-sm font-semibold mr-2 ${message.role === 'user' ? 'text-primary' : 'text-secondary'}`}>
+          <span className={`text-[14px] font-semibold mr-2 ${message.role === 'user' ? 'text-primary' : 'text-secondary'}`}>
             {message.role === 'user' ? '你' : modelName || '助手'}
           </span>
-          <span className="text-xs text-text-tertiary">{formatTime(message.timestamp)}</span>
+          <span className="text-[12px] text-text-tertiary">{formatTime(message.timestamp)}</span>
         </div>
 
         {/* 消息主体 */}
-        <div className={`bg-bg-secondary rounded-lg p-3 shadow-sm border ${message.role === 'user' ? 'border-primary shadow-[0_2px_4px_rgba(126,34,206,0.1)]' : 'border-border-default'}`}>
+        <div className={`bg-bg-secondary rounded-lg p-3 shadow-sm border ${message.role === 'user' ? 'border-primary shadow-[0_2px_4px_rgba(126,34,206,0.1)]' : 'border-border-default'} text-[14px]`}>
           <ReactMarkdown
             rehypePlugins={[rehypeHighlight]}
             components={{
@@ -127,9 +149,9 @@ const MessageItem: React.FC<MessageItemProps> = ({ message, modelName }) => {
         {/* 消息统计和操作 */}
         <div className="flex justify-between items-center mt-2">
           {/* 消息统计 */}
-          <div className="flex items-center gap-3 text-xs text-text-tertiary opacity-0 group-hover:opacity-100 transition-opacity duration-fast">
+          <div className="flex items-center gap-3 text-xs text-text-tertiary">
             {message.time && (
-              <span>响应时间: {message.time}ms</span>
+              <span>响应时间: {formatResponseTime(message.time)}</span>
             )}
             {message.tokens && (
               <span>Tokens: {message.tokens}</span>

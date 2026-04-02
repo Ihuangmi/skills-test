@@ -1,7 +1,7 @@
 // 消息输入组件
 import React, { useState, useRef, useEffect } from 'react';
-import { Input, Button, Tooltip } from 'antd';
-import { SendOutlined, StopOutlined } from '@ant-design/icons';
+import { Input, Tooltip } from 'antd';
+import { SendOutlined, CloseCircleFilled } from '@ant-design/icons';
 import { useChat } from '../../hooks/useChat';
 
 const { TextArea } = Input;
@@ -81,29 +81,29 @@ const MessageInput: React.FC<MessageInputProps> = ({ disabled = false }) => {
 
         {/* 操作按钮 */}
         <div className="flex flex-col gap-2">
-          {/* 停止按钮 */}
-          {isStreaming && (
+          {/* 停止按钮 - 流式响应时显示，替换发送按钮 */}
+          {isStreaming ? (
             <Tooltip title="停止生成">
-              <Button
-                danger
-                icon={<StopOutlined />}
+              <button
                 onClick={stopStreaming}
-                className="w-10 h-10 p-0 flex items-center justify-center rounded-full"
-              />
+                className="w-auto h-10 px-4 flex items-center justify-center gap-2 rounded-full bg-white text-gray-700 hover:bg-gray-50 transition-all duration-200 border border-gray-300 shadow-sm hover:shadow"
+              >
+                <CloseCircleFilled className="text-base" />
+                <span className="text-sm font-medium">停止</span>
+              </button>
+            </Tooltip>
+          ) : (
+            /* 发送按钮 - 非流式响应时显示 */
+            <Tooltip title="发送消息 (Enter)">
+              <button
+                onClick={handleSend}
+                disabled={!inputValue.trim() || isSending || disabled}
+                className="w-10 h-10 flex items-center justify-center rounded-full bg-primary text-white hover:bg-primary-dark transition-all duration-200 shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary"
+              >
+                <SendOutlined className="text-base" />
+              </button>
             </Tooltip>
           )}
-
-          {/* 发送按钮 */}
-          <Tooltip title="发送消息 (Enter)">
-            <Button
-              type="primary"
-              icon={<SendOutlined />}
-              onClick={handleSend}
-              disabled={!inputValue.trim() || isSending || disabled}
-              loading={isSending}
-              className="w-10 h-10 p-0 flex items-center justify-center rounded-full"
-            />
-          </Tooltip>
         </div>
       </div>
     </div>

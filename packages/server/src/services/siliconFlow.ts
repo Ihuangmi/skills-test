@@ -1,4 +1,4 @@
-// 阿里云通义千问API服务
+// 阿里云百炼API服务
 import axios, { AxiosError } from "axios";
 import type {
   APIResponse,
@@ -8,7 +8,7 @@ import type {
   ModelInfo,
 } from "../types";
 
-// 阿里云通义千问API基础URL
+// 阿里云百炼API基础URL
 const API_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1";
 
 /**
