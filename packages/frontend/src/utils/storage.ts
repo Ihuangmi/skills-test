@@ -1,4 +1,6 @@
 // 本地存储工具
+import type { UserConfig } from '../types';
+
 // 版本管理：用于 schema 迁移
 const STORAGE_VERSION = 1;
 const STORAGE_KEYS = {
@@ -65,14 +67,16 @@ export const getAPIKey = (): string => {
 /**
  * 保存用户配置
  */
-export const saveUserConfig = (config: any): void => {
+export const saveUserConfig = (config: Partial<UserConfig>): void => {
   saveToStorage(STORAGE_KEYS.USER_CONFIG, config);
 };
 
 /**
  * 获取用户配置
  */
-export const getUserConfig = (defaultValue: any): any => {
+export const getUserConfig = (
+  defaultValue: Partial<UserConfig>,
+): Partial<UserConfig> => {
   return getFromStorage(STORAGE_KEYS.USER_CONFIG, defaultValue);
 };
 

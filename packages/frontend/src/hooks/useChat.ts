@@ -157,7 +157,8 @@ export const useChat = create<ChatState>((set, get) => {
 
     // 发送消息
     sendMessage: async (content) => {
-      const { apiKey, modelConfig } = useConfig.getState();
+      const { apiKey, baseUrl, modelConfig } = useConfig.getState();
+
 
       // 验证API Key
       if (!apiKey) {
@@ -233,7 +234,9 @@ export const useChat = create<ChatState>((set, get) => {
         apiKey,
         messagesWithSystem,
         modelConfig,
+        baseUrl,
         (chunk) => {
+
           // 更新助手消息内容
           const session = get().getCurrentSession();
           if (!session) return;
@@ -353,3 +356,4 @@ export const useChat = create<ChatState>((set, get) => {
     },
   };
 });
+

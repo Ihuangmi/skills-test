@@ -4,6 +4,7 @@ import { useChat } from '../../hooks/useChat';
 import { useConfig } from '../../hooks/useConfig';
 import MessageItem from './MessageItem';
 import MessageInput from './MessageInput';
+import ModelSelector from './ModelSelector';
 
 const ChatMain: React.FC = () => {
   const { getCurrentSession, error } = useChat();
@@ -70,26 +71,14 @@ const ChatMain: React.FC = () => {
     );
   };
 
-  // 渲染API Key未设置提示
-  const renderAPIKeyPrompt = () => {
-    if (apiKey) return null;
-
-    return (
-      <div className="flex flex-col items-center justify-center h-full p-12 text-center">
-        <div className="w-16 h-16 rounded-full bg-bg-tertiary flex items-center justify-center text-2xl text-text-tertiary mb-4">🔑</div>
-        <h3 className="text-lg font-semibold text-text-primary mb-2">请先设置API Key</h3>
-        <p className="text-sm text-text-secondary max-w-[300px]">在配置面板中输入您的阿里云百炼 API Key</p>
-      </div>
-    );
-  };
-
   return (
     <div className="flex-1 flex flex-col bg-bg-primary relative overflow-hidden h-full min-h-0">
       {/* 聊天头部 */}
-      <div className="p-4 border-b border-border-default sticky top-0 bg-bg-primary z-10 flex justify-between items-center">
+      <div className="p-4 border-b border-border-default sticky top-0 bg-bg-primary z-10 flex justify-between items-center shadow-sm">
         <h2 className="text-lg font-semibold text-text-primary">
           {currentSession?.title || '新会话'}
         </h2>
+        <ModelSelector />
       </div>
 
       {/* 错误提示 */}
@@ -100,7 +89,6 @@ const ChatMain: React.FC = () => {
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto flex flex-col scrollbar-thin scrollbar-thumb-text-tertiary scrollbar-track-bg-tertiary"
       >
-        {/*{apiKey ? renderMessages() : renderAPIKeyPrompt()}*/}
         {renderMessages()}
       </div>
 

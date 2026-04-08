@@ -5,13 +5,18 @@ import { getAvailableModels } from '../services/siliconFlow';
 
 const router = express.Router();
 
+const getModelBaseUrl = (req: Request) => {
+  const baseUrlHeader = req.headers['x-model-base-url'];
+  return Array.isArray(baseUrlHeader) ? baseUrlHeader[0] : baseUrlHeader;
+};
+
 /**
  * 获取模型列表
  */
 router.get('/', async (req: Request, res: Response) => {
   try {
-    // 从请求头获取API Key
     const apiKey = req.headers.authorization?.replace('Bearer ', '') || '';
+    const baseUrl = getModelBaseUrl(req);
     
     if (!apiKey) {
       return res.status(401).json({
@@ -24,17 +29,15 @@ router.get('/', async (req: Request, res: Response) => {
       });
     }
     
-    // 获取模型列表
-    const models = await getAvailableModels(apiKey);
+    const models = await getAvailableModels(apiKey, baseUrl);
     
-    // 返回响应
-    res.json({
+    return res.json({
       object: 'list',
       data: models.map(model => ({
         id: model.id,
         object: 'model',
         created: Math.floor(Date.now() / 1000),
-        owned_by: 'qwen',
+        owned_by: 'openai-compatible',
       })),
     });
   } catch (error) {

@@ -37,6 +37,7 @@ export interface ModelConfig {
 // 用户配置类型
 export interface UserConfig {
   apiKey: string;
+  baseUrl: string;
   modelConfig: ModelConfig;
 }
 

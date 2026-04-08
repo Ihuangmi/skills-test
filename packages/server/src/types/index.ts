@@ -3,7 +3,7 @@
 // 消息类型
 export interface Message {
   id: string;
-  role: 'user' | 'assistant';
+  role: 'user' | 'assistant' | 'system';
   content: string;
   timestamp: number;
   time?: number;
@@ -69,12 +69,16 @@ export interface APIError {
 export interface ChatRequest {
   model: string;
   messages: Array<{
-    role: 'user' | 'assistant';
+    role: 'user' | 'assistant' | 'system';
     content: string;
   }>;
   temperature: number;
   max_tokens: number;
   stream: boolean;
+}
+
+export interface UpstreamRequestOptions {
+  baseUrl?: string;
 }
 
 // 模型信息
